@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import datetime as dt
 
 def get_weather_data(location):
-    location = location.strip().title()  # ✅ normalize input
+    location = location.strip().title()  # normalize input
     API_KEY = st.secrets["API_KEY"]
 
     locations = {
@@ -87,7 +87,7 @@ def get_weather_data(location):
         else:
             aqi_max = None
 
-        weather_data["aqi_numeric"] = aqi_max  # still 1–5 scale
+        weather_data["aqi_numeric"] = aqi_max  # 1–5 scale
 
     except Exception as e:
         st.warning(f"Failed to fetch historical AQI data: {e}")
