@@ -12,7 +12,7 @@ import datetime
 import holidays
 from sklearn.preprocessing import LabelEncoder
 
-left_co, cent_co = st.columns([1, 4])  # Adjust column width ratio here
+left_co, cent_co = st.columns([1, 4])
 
 with left_co:
     st.image("rising_tide_vertical.png", use_container_width=True)
@@ -134,9 +134,6 @@ if st.button("🔮 Predict"):
         st.write(f"Opening Greeter team: **{greeter} new members**")
         st.write(f"Closing Greeter team: **{greeter} new members**")
         st.write(f"Sales Supervisor/Manager: **{math.ceil(leftover)} new members**")
-
-
-
 
     else:
         st.error("❌ Weather data is missing — prediction cannot proceed.")
