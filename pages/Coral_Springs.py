@@ -6,8 +6,6 @@ import pandas as pd
 import joblib
 import numpy as np
 from dateutil.utils import today
-from scipy.integrate import tplquad
-from sqlalchemy.dialects.mssql.information_schema import columns
 import datetime
 import holidays
 from sklearn.preprocessing import LabelEncoder
