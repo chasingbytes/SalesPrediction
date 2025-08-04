@@ -1,0 +1,11 @@
+streamlit~=1.45.1
+pandas~=2.3.0
+joblib~=1.5.1
+numpy~=2.3.0
+DateTime~=5.5
+holidays~=0.76
+python-dateutil~=2.9.0.post0
+scipy~=1.16.0
+SQLAlchemy~=2.0.41
+scikit-learn~=1.7.0
+requests~=2.32.4
