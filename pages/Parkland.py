@@ -26,11 +26,6 @@ with cent_co:
     )
 st.markdown("---")
 
-
-# title
-#st.markdown("<h1 style='text-align: center;'>Parkland Daily Prediction</h1>", unsafe_allow_html=True)
-#st.markdown("---")
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 model_path = os.path.join(os.path.dirname(__file__), '..', 'xgb_PARKLAND_model.pkl')
 model_path = os.path.abspath(model_path) # get absolute path
