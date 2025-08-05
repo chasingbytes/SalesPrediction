@@ -139,8 +139,13 @@ if st.button("🔮 Predict"):
 
         st.subheader(f"Predicted Total Car Count (Retail & Members): **{int(prediction)} cars**")
 
+        if dayofweek <=4:
+             multiplier = 0.00
+        else:
+             multiplier = 0.05
+                    
         # calculations
-        members = prediction * 0.75
+        members = prediction * (0.27 + multiplier)
         conversion = members * 0.10
 
         st.subheader(f":blue_car: Predicted Potential Members: {members:.0f} cars :blue_car:")
