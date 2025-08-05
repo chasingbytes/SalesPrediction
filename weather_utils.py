@@ -3,10 +3,13 @@ import requests
 import streamlit as st
 from datetime import datetime, timedelta
 import datetime as dt
+import os
 
 def get_weather_data(location):
     location = location.strip().title()  # normalize input
-    API_KEY = st.secrets["API_KEY"]
+    API_KEY = os.environ["API_KEY"]
+    if not API_KEY:
+        st.error("API key invalid/missing")
 
     locations = {
         "Coral Springs": {"lat": 26.2712, "lon": -80.2706},
