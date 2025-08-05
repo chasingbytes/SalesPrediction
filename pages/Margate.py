@@ -1,30 +1,38 @@
+import math
 import streamlit as st
 import sys
 import os
 import pandas as pd
 import joblib
 import numpy as np
-from dateutil.utils import today
-import datetime
+from datetime import datetime
+from zoneinfo import ZoneInfo
 import holidays
 from sklearn.preprocessing import LabelEncoder
-import math
 
+now = datetime.now(ZoneInfo("America/New_York"))
+today = now.date()
 left_co, cent_co = st.columns([1, 4])
 
 with left_co:
-    st.image("rising_tide_vertical.png", use_container_width=True)
+    st.image("rising_tide_vertical.png", width=100)
 
 with cent_co:
     st.markdown(
-        """
+        f"""
         <div style='display: flex; align-items: center; height: 100%;'>
-            <h1 style='margin: 0; padding-left: 50px;'>Margate Predictions</h1>
+            <div style='padding-left: 50px;'>
+                <h1 style='margin: 0;'>Margate Predictions</h1>
+                <div style='margin-top: 6px; font-size: 1.95rem; opacity: 0.8;'>
+                    {now.strftime("%A, %B %d, %Y")}
+                </div>
+            </div>
         </div>
         """,
         unsafe_allow_html=True
     )
 st.markdown("---")
+
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 model_path = os.path.join(os.path.dirname(__file__), '..', 'xgb_MARGATE_model.pkl')
@@ -37,7 +45,6 @@ from weather_utils import get_weather_data
 location = "Margate"
 
 # datetime features
-today = datetime.date.today()
 year = 2025 # most current year from model data
 month = today.month
 dayofweek = today.weekday()
@@ -46,6 +53,7 @@ is_weekend = 1 if dayofweek >= 5 else 0
 us_holidays = holidays.US(years=2025)
 is_holiday = 1 if today in us_holidays else 0
 uv_index = 10
+
 weather = get_weather_data(location)
 
 # === Sidebar: Weather Snapshot ===
@@ -57,7 +65,7 @@ with st.sidebar:
         - **Condition:** {weather['conditions']}  
         - **Humidity:** {weather['humidity']}%  
         - **Cloud Cover:** {weather['cloudcover']}%  
-        - **Rain (last 1h):** {weather['precip']} mm  
+        - **Rain (last 5h):** {weather['precip']} mm  
         - **High Temp:** {weather['tempmax']} °F  
         - **Low Temp:** {weather['tempmin']} °F  
         - **Rain Chance:** {weather['precipcover']:.0f}%   
@@ -140,7 +148,9 @@ if st.button("🔮 Predict"):
         st.write(f"Opening Greeter team: **{greeter} new members**")
         st.write(f"Closing Greeter team: **{greeter} new members**")
         st.write(f"Sales Supervisor/Manager: **{math.ceil(leftover)} new members**")
-        
+
+
+
+
     else:
         st.error("❌ Weather data is missing — prediction cannot proceed.")
-
