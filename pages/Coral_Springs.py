@@ -140,7 +140,7 @@ if st.button("🔮 Predict"):
         st.subheader(f"Predicted Total Car Count (Retail & Members): **{int(prediction)} cars**")
 
         # calculations
-        members = prediction * 0.70
+        members = prediction * 0.75
         conversion = members * 0.10
 
         st.subheader(f":blue_car: Predicted Potential Members: {members:.0f} cars :blue_car:")
