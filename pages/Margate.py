@@ -139,8 +139,13 @@ if st.button("🔮 Predict"):
 
         st.subheader(f"Predicted Total Car Count (Retail & Members): **{int(prediction)} cars**")
 
-        # calculations
-        members = prediction * 0.8125
+        if dayofweek <=4:
+             multiplier = 0.00
+        else:
+             multiplier = 0.05
+                    
+            # calculations
+        members = prediction * (0.25 + multiplier)
         conversion = members * 0.10
         # FS calculations
         # Calculate FS count from car count prediction (Weekends usually busier)
