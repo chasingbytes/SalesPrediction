@@ -10,6 +10,15 @@ from zoneinfo import ZoneInfo
 import holidays
 from sklearn.preprocessing import LabelEncoder
 
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
 now = datetime.now(ZoneInfo("America/New_York"))
 today = now.date()
 left_co, cent_co = st.columns([1, 4])
@@ -94,34 +103,41 @@ def custom_aqi_score(aqi):
 
 weather["aqi_category"] = custom_aqi_score(weather["aqi_numeric"])
 
+import time
+
 # === For Future Prediction Button ===
 if st.button("🔮 Predict"):
     if weather:
-        # feature vector
-        features = np.array([[
-            weather["tempmax"],
-            weather["tempmin"],
-            weather["temp"],
-            weather["humidity"],
-            weather["precip"],
-            weather["precipcover"],
-            weather["cloudcover"],
-            uv_index,
-            conditions_encoded,
-            year,
-            month,
-            dayofweek,
-            weekofyear,
-            is_weekend,
-            prev_day_rain,
-            prev_car_count,
-            rolling_rain_2,
-            is_holiday,
-            weather["aqi_category"]
-        ]])
+        with st.spinner("Crunching the numbers…"):
+            # feature vector
+            features = np.array([[
+                weather["tempmax"],
+                weather["tempmin"],
+                weather["temp"],
+                weather["humidity"],
+                weather["precip"],
+                weather["precipcover"],
+                weather["cloudcover"],
+                uv_index,
+                conditions_encoded,
+                year,
+                month,
+                dayofweek,
+                weekofyear,
+                is_weekend,
+                prev_day_rain,
+                prev_car_count,
+                rolling_rain_2,
+                is_holiday,
+                weather["aqi_category"]
+            ]])
 
-        prediction = margate_model.predict(features)[0]
-        st.subheader(f"Predicted Car Count: **{int(prediction)} cars**")
+            # simulate 3s work
+            time.sleep(3)
+
+            prediction = margate_model.predict(features)[0]
+
+        st.subheader(f"Predicted Total Car Count (Retail & Members): **{int(prediction)} cars**")
 
         # calculations
         members = prediction * 0.70
