@@ -7,7 +7,7 @@ import os
 
 def get_weather_data(location):
     location = location.strip().title()  # normalize input
-    API_KEY = os.environ["API_KEY"]
+    API_KEY = st.secrets["API_KEY"]
     if not API_KEY:
         st.error("API key invalid/missing")
 
