@@ -96,7 +96,7 @@ weather["aqi_category"] = custom_aqi_score(weather["aqi_numeric"])
 
 # Encode conditions using LabelEncoder
 le = LabelEncoder()
-le.fit(['Clear', "Partially Cloudy", "Rain, Partially Cloudy", "Rain, Overcast", "Overcast", "Clouds"])
+le.fit(["Clear", "Partially Cloudy", "Rain, Partially Cloudy", "Rain, Overcast", "Overcast", "Clouds", "Rain"])
 conditions_encoded = le.transform([weather['conditions']])[0]
 
 # prev day rain
