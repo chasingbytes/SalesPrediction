@@ -27,5 +27,5 @@ with st.expander("📘 How it works", expanded=True):
     
     **📍 Step 2**: Enter total car count from yesterday, find this on: *WashConnect > Vehicle Performance*.
     
-    **📍 Step 4**: Click `Predict` to fetch weather & generate your forecast.
+    **📍 Step 3**: Click `Predict` to fetch weather & generate your forecast.
     """)
